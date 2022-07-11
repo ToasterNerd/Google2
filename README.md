@@ -7,4 +7,4 @@ Se puede correr en localhost teniendo:
 - MySQL con phpmyadmin (WAMP o similares)
 - JDK 11
 - Visual Studio Code (IDE utilizado para realizar el código)
-- Springboot / maven / Hibernate (JPA)
+- Springboot / maven / Hibernate (JPA) / lombok
