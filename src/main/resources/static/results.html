@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google2</title>
+
+    <link rel="stylesheet" href="results.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="main">
+        <img id="logo" src="img/logo-Google.png" />
+        <input type="text" id="txtSearch"/>
+        <hr />
+        <div id="results">
+            <span class="total-results">Cerca de 88,200,000 resultados (0.62 segundos) </span>
+            <div id ="links">
+                <div class="result">
+                    <h3>Foro (Internet) - Wikipedia, la enciclopedia libre</h3>
+                    <span>Un foro de Internet es un sitio de discusión en línea asincrónico
+                        donde las personas publican mensajes alrededor de un tema, creando
+                        de esta forma un hilo ...</span>
+                </div>
+                <div class="result">
+                    <h3>Foro (Internet) - Wikipedia, la enciclopedia libre</h3>
+                    <span>Un foro de Internet es un sitio de discusión en línea asincrónico
+                        donde las personas publican mensajes alrededor de un tema, creando
+                        de esta forma un hilo ...</span>
+                </div>
+                <div class="result">
+                    <h3>Foro (Internet) - Wikipedia, la enciclopedia libre</h3>
+                    <span>Un foro de Internet es un sitio de discusión en línea asincrónico
+                        donde las personas publican mensajes alrededor de un tema, creando
+                        de esta forma un hilo ...</span>
+                </div>
+                <div class="result">
+                    <h3>Foro (Internet) - Wikipedia, la enciclopedia libre</h3>
+                    <span>Un foro de Internet es un sitio de discusión en línea asincrónico
+                        donde las personas publican mensajes alrededor de un tema, creando
+                        de esta forma un hilo ...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    //ACA ABAJO HAGO TODO EL LABURO PARA TRAER LO QUE PIDO POR GET DE LA PAG Y LO PONGO EN EL FRONT ABAJO DEL BUSCADOR
+    //esto es para que cuando ponga en la url lo que estoy buscando, me lo ponga despues en el buscador allá abajo de google.
+    let aux = document.location.href.split('?query=');
+    let query = aux [1];
+    document.getElementById("txtSearch").value = query;
+
+    //hago un fetch que me va a dar un resultado que con el then lo transformo en json y lo muesto en otro then
+    fetch('http://localhost:8080/api/results?query='+query)
+    .then(response => response.json())
+    .then(json => {
+        console.log(json)
+
+        let html = '';
+        for(let resultSearch of json){
+            html += getHtmlResultsSearch(resultSearch) //voy metiendo al html lo que voy trayendo de del get que hago
+        }
+        document.getElementById("links").outerHTML = html; //le asigno al html el html que traigo y voy llenando
+
+
+        function getHtmlResultsSearch(resultSearch){ //esta funcion nos va a devolver el html
+            let title = resultSearch.title
+            let description = resultSearch.description
+
+            //cuando hago click tambien hace que abra una nueva pestaña con el url
+            return `<div class="result">
+                <h3><a href="${resultSearch.url}" target ="_blank">${title}</h3>
+                <span>${description}</span>
+            </div>`;
+        }
+    })
+</script>
+
+</body>
+
+</html>

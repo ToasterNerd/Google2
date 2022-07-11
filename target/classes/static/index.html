@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google2</title>
+
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    
+    <div id="main">
+        <img id="logo" src="img/logo-Google.png"/>
+        <input id="searchInput" type="text" />
+        <button onclick="search()">Search</button>
+        <button>I'm Feeling lucky</button>
+    </div>
+
+<script>
+    //traigo los datos del input para cargar en result cuando hago click en buscar
+    function search(){
+        let textSearch = document.getElementById('searchInput').value
+        document.location.href = "results.html?query=" + textSearch // me redirige a result.html con el ?
+    }
+</script>
+
+</body>
+</html>
